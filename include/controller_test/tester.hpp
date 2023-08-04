@@ -12,6 +12,7 @@
 #include <nav2_util/node_thread.hpp>
 #include <nav2_core/controller.hpp>
 #include <pluginlib/class_loader.hpp>
+#include <interactive_markers/interactive_marker_server.hpp>
 
 #include "object.hpp"
 #include "objects/robot.hpp"
@@ -21,6 +22,7 @@ namespace controller_test
 {
 
 using CallbackReturn = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
+using MarkerServer = interactive_markers::InteractiveMarkerServer;
 
 class Tester : public rclcpp_lifecycle::LifecycleNode
 {
@@ -46,11 +48,10 @@ protected:
 
   void updateObjects();
 
-  
-
-  rclcpp::Node::SharedPtr tf_node_;
+  rclcpp::Node::SharedPtr basic_node_;
   std::shared_ptr<tf2_ros::TransformBroadcaster> tf_broadcaster_;
   std::shared_ptr<tf2_ros::Buffer> tf_buffer_;
+  std::unique_ptr<nav2_util::NodeThread> basic_thread_;
 
   std::shared_ptr<nav2_costmap_2d::Costmap2DROS> costmap_;
   std::unique_ptr<nav2_util::NodeThread> costmap_thread_;
@@ -61,6 +62,8 @@ protected:
   std::vector<object::Object::SharedPtr> objects_;
 
   rclcpp::TimerBase::SharedPtr running_timer_;
+
+  std::shared_ptr<MarkerServer> interactive_server_;
 };
 
 

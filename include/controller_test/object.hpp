@@ -12,6 +12,7 @@
 #include <geometry_msgs/msg/twist.hpp>
 #include <geometry_msgs/msg/point.hpp>
 #include <nav2_util/node_utils.hpp>
+#include <interactive_markers/interactive_marker_server.hpp>
 
 namespace controller_test
 {
@@ -35,13 +36,16 @@ ParamT getParam(NodeT node, std::string param_name, ParamT default_value) {
 }
 
 using FootPrint = std::vector<geometry_msgs::msg::Point>;
+using MarkerServer = interactive_markers::InteractiveMarkerServer;
 
 class Object
 {
 public:
   RCLCPP_SHARED_PTR_DEFINITIONS(Object)
+  
   explicit Object(
     const rclcpp_lifecycle::LifecycleNode::SharedPtr node,
+    const std::shared_ptr<MarkerServer> marker_server,
     const std::shared_ptr<tf2_ros::TransformBroadcaster> tf_broad_caster,
     const std::shared_ptr<tf2_ros::Buffer> tf,
     const std::string frame_id

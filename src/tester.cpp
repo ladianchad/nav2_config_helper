@@ -7,16 +7,19 @@ Tester::Tester()
 : LifecycleNode("controller_test"),
   loader_("nav2_core", "nav2_core::Controller")
 {
-  this->tf_node_ = rclcpp::Node::make_shared(std::string("_") + this->get_name(), this->get_node_options());
-  this->tf_broadcaster_ = std::make_shared<tf2_ros::TransformBroadcaster>(this->tf_node_);
+  this->basic_node_ = rclcpp::Node::make_shared(std::string("_") + this->get_name(), this->get_node_options());
+  this->tf_broadcaster_ = std::make_shared<tf2_ros::TransformBroadcaster>(this->basic_node_);
   this->tf_buffer_ = std::make_shared<tf2_ros::Buffer>(this->get_clock());
   this->costmap_ = std::make_shared<nav2_costmap_2d::Costmap2DROS>("test_costmap");
+  this->interactive_server_ = std::make_shared<MarkerServer>("interactive", this->basic_node_);
   this->costmap_thread_ = std::make_unique<nav2_util::NodeThread>(this->costmap_);
+  this->basic_thread_ = std::make_unique<nav2_util::NodeThread>(this->basic_node_);
 }
 
 Tester::~Tester()
 {
   this->costmap_thread_.reset();
+  this->basic_thread_.reset();
 }
 
 CallbackReturn 
@@ -44,6 +47,7 @@ Tester::on_configure(const rclcpp_lifecycle::State & state)
   this->objects_.push_back(
     std::make_shared<object::Robot>(
       this->shared_from_this(),
+      this->interactive_server_,
       this->tf_broadcaster_,
       this->tf_buffer_,
       this->costmap_->getBaseFrameID(),
@@ -56,6 +60,7 @@ Tester::on_configure(const rclcpp_lifecycle::State & state)
     this->objects_.push_back(
       std::make_shared<object::Obstacle>(
         this->shared_from_this(),
+        this->interactive_server_,
         this->tf_broadcaster_,
         this->tf_buffer_,
         obstacle_prefix + "_" + std::to_string(i+1)
