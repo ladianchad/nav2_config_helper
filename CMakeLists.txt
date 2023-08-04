@@ -38,17 +38,27 @@ include_directories(
   include
 )
 
+set(library_name controller_test_core)
+add_library(${library_name}
+  src/object.cpp
+  src/objects/robot.cpp
+  src/objects/obstacle.cpp
+  src/tester.cpp
+)
+ament_target_dependencies(${library_name} ${dependencies})
+
 set(executable_name controller_test)
 add_executable(${executable_name}
   src/main.cpp
 )
 ament_target_dependencies(${executable_name} ${dependencies})
+target_link_libraries(${executable_name} ${library_name})
 
-# install(TARGETS ${library_name}
-#   ARCHIVE DESTINATION lib
-#   LIBRARY DESTINATION lib
-#   RUNTIME DESTINATION bin
-# )
+install(TARGETS ${library_name}
+  ARCHIVE DESTINATION lib
+  LIBRARY DESTINATION lib
+  RUNTIME DESTINATION bin
+)
 
 install(TARGETS ${executable_name}
   RUNTIME DESTINATION lib/${PROJECT_NAME}
