@@ -1,5 +1,5 @@
-#ifndef CONTROLLER_TEST__ROBOT_HPP_
-#define CONTROLLER_TEST__ROBOT_HPP_
+#ifndef CONTROLLER_TEST__GOAL_HPP_
+#define CONTROLLER_TEST__GOAL_HPP_
 
 #include <controller_test/object.hpp>
 
@@ -9,20 +9,19 @@ namespace controller_test
 namespace object
 {
 
-class Robot : public Object
+class Goal : public Object
 {
 public:
-  RCLCPP_SMART_PTR_DEFINITIONS(Robot)
-  explicit Robot(
+  RCLCPP_SMART_PTR_DEFINITIONS(Goal)
+
+  explicit Goal(
     const rclcpp_lifecycle::LifecycleNode::SharedPtr node,
     const std::shared_ptr<tf2_ros::TransformBroadcaster> tf_broad_caster,
-    const std::shared_ptr<tf2_ros::Buffer> tf,
-    std::string frame_id,
-    const FootPrint footprint
+    const std::shared_ptr<tf2_ros::Buffer> tf
   );
 
   std::string getClassName() override {
-    return "Robot";
+    return "Goal";
   };
 
   Object::Type getType() override
@@ -32,7 +31,7 @@ public:
 
   std::string getDescription() override
   {
-    return "Robot.";
+    return "Goal.";
   }
 
 };
