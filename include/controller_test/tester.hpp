@@ -16,7 +16,10 @@
 
 #include "object.hpp"
 #include "objects/robot.hpp"
-#include "objects/obstacle.hpp"
+#include "objects/goal.hpp"
+
+#include "interact.hpp"
+#include "layer.hpp"
 
 namespace controller_test
 {
@@ -46,6 +49,8 @@ protected:
 
   object::Robot * getRobotObject();
 
+  object::Goal * getGoalObject();
+
   void updateObjects();
 
   rclcpp::Node::SharedPtr basic_node_;
@@ -58,12 +63,13 @@ protected:
 
   pluginlib::ClassLoader<nav2_core::Controller> loader_;
   nav2_core::Controller::Ptr controller_;
+  rclcpp_lifecycle::LifecyclePublisher<geometry_msgs::msg::TwistStamped>::SharedPtr vel_pub_;
 
   std::vector<object::Object::SharedPtr> objects_;
+  rclcpp::TimerBase::SharedPtr running_timer_, update_timer_;
+  interact::InteractManager::UniquePtr interact_manger_;
+  layer::TestLayer::SharedPtr test_layer_;
 
-  rclcpp::TimerBase::SharedPtr running_timer_;
-
-  std::shared_ptr<MarkerServer> interactive_server_;
 };
 
 

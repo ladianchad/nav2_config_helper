@@ -18,6 +18,8 @@ find_package(nav_2d_utils REQUIRED)
 find_package(nav_2d_msgs REQUIRED)
 find_package(nav2_core REQUIRED)
 find_package(pluginlib REQUIRED)
+find_package(interactive_markers REQUIRED)
+find_package(visualization_msgs REQUIRED)
 
 set(dependencies
   angles
@@ -32,6 +34,8 @@ set(dependencies
   nav2_util
   nav2_core
   pluginlib
+  interactive_markers
+  visualization_msgs
 )
 
 include_directories(
@@ -43,6 +47,9 @@ add_library(${library_name}
   src/object.cpp
   src/objects/robot.cpp
   src/objects/obstacle.cpp
+  src/objects/goal.cpp
+  src/interact.cpp
+  src/layer.cpp
   src/tester.cpp
 )
 ament_target_dependencies(${library_name} ${dependencies})

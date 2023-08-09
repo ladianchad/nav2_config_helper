@@ -43,16 +43,38 @@ class Object
 public:
   RCLCPP_SHARED_PTR_DEFINITIONS(Object)
   
+  enum Type {
+    STATIC,
+    DYNAMIC_NOT_MOVABLE,
+    DYNAMINC_MOVABLE,
+    UNIQUE_NOT_MOVABLE,
+    UNIQUE_MOVABLE
+  };
+
+  enum FootPrintType {
+    CIRCLE,
+    POLYGON
+  };
+
   explicit Object(
     const rclcpp_lifecycle::LifecycleNode::SharedPtr node,
-    const std::shared_ptr<MarkerServer> marker_server,
     const std::shared_ptr<tf2_ros::TransformBroadcaster> tf_broad_caster,
     const std::shared_ptr<tf2_ros::Buffer> tf,
     const std::string frame_id
   );
   ~Object();
 
-  virtual std::string getType() = 0;
+  virtual std::string getClassName() = 0;
+
+  virtual std::string getDescription() = 0;
+
+  virtual Type getType();
+
+  std::string getGlobalFrameId();
+
+  std::string getFrameId();
+
+  FootPrintType getFootPrintType();
 
   virtual void initialize();
 
@@ -68,6 +90,10 @@ public:
 
   FootPrint getFootPrint();
 
+  double getWidth();
+
+  double getHeight();
+
 protected:
   std::recursive_mutex m_;
   geometry_msgs::msg::PoseStamped pose_;
@@ -80,9 +106,8 @@ protected:
   const rclcpp_lifecycle::LifecycleNode::SharedPtr node_;
   std::string frame_id_;
   std::string global_frame_id_;
-  std::string footprint_type_;
-  std::string footprint_str_;
-  double footprint_radius_;
+  FootPrintType footprint_type_;
+  FootPrint footprint_;
 };
 
 } // namespace object
