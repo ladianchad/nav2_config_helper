@@ -4,9 +4,9 @@
 #include <tf2/transform_datatypes.h>
 
 #include <tf2_geometry_msgs/tf2_geometry_msgs.hpp>
-#include <nav2_configuration_helper/interact.hpp>
+#include <nav2_config_helper/interact.hpp>
 
-namespace nav2_configuration_helper
+namespace nav2_config_helper
 {
 
 namespace interact
@@ -128,4 +128,4 @@ InteractManager::getColor(const object::Object::Type type)
 } // namespace interact
 
 
-} // namespace nav2_configuration_helper
+} // namespace nav2_config_helper

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(nav2_configuration_helper_rviz_plugin)
+project(nav2_config_helper)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
@@ -42,7 +42,7 @@ include_directories(
   include
 )
 
-set(library_name nav2_configuration_helper_rviz_plugin_core)
+set(library_name nav2_config_helper_core)
 add_library(${library_name}
   src/object.cpp
   src/objects/robot.cpp

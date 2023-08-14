@@ -1,5 +1,5 @@
-#ifndef NAV2_CONFIGURATION_HELPER__LAYER_HPP_
-#define NAV2_CONFIGURATION_HELPER__LAYER_HPP_
+#ifndef NAV2_CONFIG_HELPER__LAYER_HPP_
+#define NAV2_CONFIG_HELPER__LAYER_HPP_
 
 #include <vector>
 
@@ -7,7 +7,7 @@
 
 #include "object.hpp"
 
-namespace nav2_configuration_helper
+namespace nav2_config_helper
 {
 
 namespace layer
@@ -50,7 +50,7 @@ private:
 } // namespace layer
 
 
-} // namespace nav2_configuration_helper
+} // namespace nav2_config_helper
 
 
 #endif

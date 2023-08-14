@@ -1,6 +1,6 @@
-#include <nav2_configuration_helper/objects/goal.hpp>
+#include <nav2_config_helper/objects/goal.hpp>
 
-namespace nav2_configuration_helper
+namespace nav2_config_helper
 {
 
 namespace object
@@ -16,4 +16,4 @@ Goal::Goal(
 
 
 } // namespace object
-} // namespace nav2_configuration_helper
+} // namespace nav2_config_helper

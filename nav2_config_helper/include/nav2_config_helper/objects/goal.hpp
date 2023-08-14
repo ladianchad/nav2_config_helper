@@ -1,9 +1,9 @@
-#ifndef NAV2_CONFIGURATION_HELPER__GOAL_HPP_
-#define NAV2_CONFIGURATION_HELPER__GOAL_HPP_
+#ifndef NAV2_CONFIG_HELPER__GOAL_HPP_
+#define NAV2_CONFIG_HELPER__GOAL_HPP_
 
-#include <nav2_configuration_helper/object.hpp>
+#include <nav2_config_helper/object.hpp>
 
-namespace nav2_configuration_helper
+namespace nav2_config_helper
 {
 
 namespace object
@@ -38,6 +38,6 @@ public:
 
 } // namespace object
 
-} // namespace nav2_configuration_helper
+} // namespace nav2_config_helper
 
 #endif

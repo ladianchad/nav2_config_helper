@@ -1,5 +1,5 @@
-#ifndef NAV2_CONFIGURATION_HELPER__OBJECT_HPP_
-#define NAV2_CONFIGURATION_HELPER__OBJECT_HPP_
+#ifndef NAV2_CONFIG_HELPER__OBJECT_HPP_
+#define NAV2_CONFIG_HELPER__OBJECT_HPP_
 
 #include <tf2_ros/transform_broadcaster.h>
 #include <tf2_ros/buffer.h>
@@ -14,7 +14,7 @@
 #include <nav2_util/node_utils.hpp>
 #include <interactive_markers/interactive_marker_server.hpp>
 
-namespace nav2_configuration_helper
+namespace nav2_config_helper
 {
 
 namespace object
@@ -112,7 +112,7 @@ protected:
 
 } // namespace object
 
-} // namespace nav2_configuration_helper
+} // namespace nav2_config_helper
 
 
 #endif

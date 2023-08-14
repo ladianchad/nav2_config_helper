@@ -1,9 +1,9 @@
 #include <tf2_geometry_msgs/tf2_geometry_msgs.hpp>
 #include <tf2/utils.h>
 
-#include <nav2_configuration_helper/objects/obstacle.hpp>
+#include <nav2_config_helper/objects/obstacle.hpp>
 
-namespace nav2_configuration_helper
+namespace nav2_config_helper
 {
 
 namespace object
@@ -18,4 +18,4 @@ Obstacle::Obstacle(
 {
 }
 } // namespace object
-} // namespace nav2_configuration_helper
+} // namespace nav2_config_helper

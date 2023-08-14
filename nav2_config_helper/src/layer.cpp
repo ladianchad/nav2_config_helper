@@ -1,6 +1,6 @@
-#include <nav2_configuration_helper/layer.hpp>
+#include <nav2_config_helper/layer.hpp>
 
-namespace nav2_configuration_helper
+namespace nav2_config_helper
 {
 
 namespace layer
@@ -72,4 +72,4 @@ TestLayer::resetObstacle()
 } // namespace layer
 
   
-} // namespace nav2_configuration_helper
+} // namespace nav2_config_helper

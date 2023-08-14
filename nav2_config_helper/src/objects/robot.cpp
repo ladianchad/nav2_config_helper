@@ -1,6 +1,6 @@
-#include <nav2_configuration_helper/objects/robot.hpp>
+#include <nav2_config_helper/objects/robot.hpp>
 
-namespace nav2_configuration_helper
+namespace nav2_config_helper
 {
 
 namespace object
@@ -21,4 +21,4 @@ Robot::Robot(
 
 
 } // namespace object
-} // namespace nav2_configuration_helper
+} // namespace nav2_config_helper
