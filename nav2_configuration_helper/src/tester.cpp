@@ -1,12 +1,12 @@
-#include <controller_test/tester.hpp>
+#include <nav2_configuration_helper/tester.hpp>
 
-#include <controller_test/objects/obstacle.hpp>
+#include <nav2_configuration_helper/objects/obstacle.hpp>
 
-namespace controller_test
+namespace nav2_configuration_helper
 {
 
 Tester::Tester()
-: LifecycleNode("controller_test"),
+: LifecycleNode("nav2_configuration_helper"),
   loader_("nav2_core", "nav2_core::Controller")
 {
   this->basic_node_ = rclcpp::Node::make_shared(std::string("_") + this->get_name(), this->get_node_options());
@@ -193,4 +193,4 @@ Tester::updateObjects()
 }
 
 
-} // namespace controller_test
+} // namespace nav2_configuration_helper

@@ -1,9 +1,9 @@
-#ifndef CONTROLLER_TEST__GOAL_HPP_
-#define CONTROLLER_TEST__GOAL_HPP_
+#ifndef NAV2_CONFIGURATION_HELPER__GOAL_HPP_
+#define NAV2_CONFIGURATION_HELPER__GOAL_HPP_
 
-#include <controller_test/object.hpp>
+#include <nav2_configuration_helper/object.hpp>
 
-namespace controller_test
+namespace nav2_configuration_helper
 {
 
 namespace object
@@ -38,6 +38,6 @@ public:
 
 } // namespace object
 
-} // namespace controller_test
+} // namespace nav2_configuration_helper
 
 #endif

@@ -1,11 +1,11 @@
 #include <tf2/utils.h>
 #include <tf2_geometry_msgs/tf2_geometry_msgs.hpp>
 
-#include <controller_test/object.hpp>
+#include <nav2_configuration_helper/object.hpp>
 #include <nav2_costmap_2d/footprint.hpp>
 #include <nav2_util/node_utils.hpp>
 
-namespace controller_test
+namespace nav2_configuration_helper
 {
 
 namespace object
@@ -159,4 +159,4 @@ Object::getHeight()
 }
 
 } // namespace object
-} // namespace controller_test
+} // namespace nav2_configuration_helper
