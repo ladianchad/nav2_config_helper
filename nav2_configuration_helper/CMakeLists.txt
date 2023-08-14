@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(controller_test)
+project(nav2_configuration_helper)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
@@ -42,7 +42,7 @@ include_directories(
   include
 )
 
-set(library_name controller_test_core)
+set(library_name nav2_configuration_helper_core)
 add_library(${library_name}
   src/object.cpp
   src/objects/robot.cpp
@@ -54,7 +54,7 @@ add_library(${library_name}
 )
 ament_target_dependencies(${library_name} ${dependencies})
 
-set(executable_name controller_test)
+set(executable_name ${PROJECT_NAME})
 add_executable(${executable_name}
   src/main.cpp
 )

@@ -1,5 +1,5 @@
-#ifndef CONTROLLER_TEST__TESTER_HPP_
-#define CONTROLLER_TEST__TESTER_HPP_
+#ifndef NAV2_CONFIGURATION_HELPER__TESTER_HPP_
+#define NAV2_CONFIGURATION_HELPER__TESTER_HPP_
 
 #include <vector>
 
@@ -21,7 +21,7 @@
 #include "interact.hpp"
 #include "layer.hpp"
 
-namespace controller_test
+namespace nav2_configuration_helper
 {
 
 using CallbackReturn = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
@@ -73,6 +73,6 @@ protected:
 };
 
 
-} // namespace controller_test
+} // namespace nav2_configuration_helper
 
 #endif

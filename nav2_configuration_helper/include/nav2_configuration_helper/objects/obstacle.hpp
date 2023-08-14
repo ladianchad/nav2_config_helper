@@ -1,9 +1,9 @@
-#ifndef CONTROLLER_TEST__OBSTACLE_HPP_
-#define CONTROLLER_TEST__OBSTACLE_HPP_
+#ifndef NAV2_CONFIGURATION_HELPER__OBSTACLE_HPP_
+#define NAV2_CONFIGURATION_HELPER__OBSTACLE_HPP_
 
-#include <controller_test/object.hpp>
+#include <nav2_configuration_helper/object.hpp>
 
-namespace controller_test
+namespace nav2_configuration_helper
 {
 
 namespace object
@@ -71,6 +71,6 @@ class GlobalStaticObstacle : public Obstacle
 
 } // namespace object
 
-} // namespace controller_test
+} // namespace nav2_configuration_helper
 
 #endif

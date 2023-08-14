@@ -1,9 +1,9 @@
-#include <controller_test/tester.hpp>
+#include <nav2_configuration_helper/tester.hpp>
 
 int main(int argc, char const *argv[])
 {
   rclcpp::init(argc, argv);
-  auto tester = std::make_shared<controller_test::Tester>();
+  auto tester = std::make_shared<nav2_configuration_helper::Tester>();
   tester->configure();
   tester->activate();
   rclcpp::spin(tester->get_node_base_interface());

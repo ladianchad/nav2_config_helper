@@ -1,5 +1,5 @@
-#ifndef CONTROLLER_TEST__INTERACT_HPP_
-#define CONTROLLER_TEST__INTERACT_HPP_
+#ifndef NAV2_CONFIGURATION_HELPER__INTERACT_HPP_
+#define NAV2_CONFIGURATION_HELPER__INTERACT_HPP_
 
 #include <functional>
 #include <map>
@@ -12,7 +12,7 @@
 
 #include "object.hpp"
 
-namespace controller_test
+namespace nav2_configuration_helper
 {
 
 namespace interact
@@ -59,6 +59,6 @@ private:
 
 } // namespace interact
   
-} // namespace controller_test
+} // namespace nav2_configuration_helper
 
 #endif
