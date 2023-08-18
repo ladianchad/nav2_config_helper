@@ -2,10 +2,10 @@
 #define NAV2_CONFIG_HELPER__OBJECT_SERVER_HPP_
 
 
-#include <vector>
+#include <map>
 
+#include <rclcpp_lifecycle/lifecycle_node.hpp>
 #include <interactive_markers/interactive_marker_server.hpp>
-#include <rclcpp/rclcpp.hpp>
 #include <geometry_msgs/msg/pose_stamped.hpp>
 #include <visualization_msgs/msg/interactive_marker_feedback.hpp>
 #include <std_msgs/msg/color_rgba.hpp>
@@ -25,16 +25,14 @@ namespace object
 using MarkerServer = interactive_markers::InteractiveMarkerServer;
 using MarkerPoseCallback = std::function<void(const geometry_msgs::msg::PoseStamped)>;
 
-class ObjectServer : public rclcpp::Node
+class ObjectServer : public rclcpp_lifecycle::LifecycleNode
 {
 public:
   RCLCPP_SMART_PTR_DEFINITIONS(ObjectServer)
-  ObjectServer(/* args */);
+  ObjectServer();
   ~ObjectServer();
 
 private:
-
-  void publishObjects();
 
   void addObject(Object::ConstSharedPtr obj);
 
@@ -42,11 +40,13 @@ private:
 
   std_msgs::msg::ColorRGBA getColor(const Object::Type type);
 
+  void publishObjects();
+
   void feedbackBackCB(
     const object::Object::SharedPtr obj,
     const visualization_msgs::msg::InteractiveMarkerFeedback::ConstSharedPtr & feedback);
 
-  std::vector<Object::SharedPtr> objs_;
+  std::map<object_id_t, Object::SharedPtr> objs_;
 
   std::unique_ptr<MarkerServer> interact_server_;
 };

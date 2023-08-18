@@ -45,11 +45,15 @@ public:
   RCLCPP_SHARED_PTR_DEFINITIONS(Object)
   
   enum Type {
-    STATIC,
-    DYNAMIC_NOT_MOVABLE,
-    DYNAMINC_MOVABLE,
-    UNIQUE_NOT_MOVABLE,
-    UNIQUE_MOVABLE
+    GLOBAL_STATIC,
+    GLOBAL_DYNAMIC_NOT_MOVABLE,
+    GLOBAL_DYNAMINC_MOVABLE,
+    GLOBAL_UNIQUE_NOT_MOVABLE,
+    GLOBAL_UNIQUE_MOVABLE,
+    LOCAL_DYNAMIC_NOT_MOVABLE,
+    LOCAL_DYNAMINC_MOVABLE,
+    LOCAL_UNIQUE_NOT_MOVABLE,
+    LOCAL_UNIQUE_MOVABLE
   };
 
   enum FootPrintType {
@@ -59,8 +63,6 @@ public:
 
   explicit Object(
     const rclcpp_lifecycle::LifecycleNode::SharedPtr node,
-    const std::shared_ptr<tf2_ros::TransformBroadcaster> tf_broad_caster,
-    const std::shared_ptr<tf2_ros::Buffer> tf,
     const std::string frame_id,
     const object_id_t id
   );
