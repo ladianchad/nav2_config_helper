@@ -27,31 +27,28 @@ namespace nav2_config_helper
 using CallbackReturn = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
 using MarkerServer = interactive_markers::InteractiveMarkerServer;
 
-class Tester : public rclcpp_lifecycle::LifecycleNode
+class Helper : public rclcpp_lifecycle::LifecycleNode
 {
 public:
   RCLCPP_SMART_PTR_DEFINITIONS(Tester)
-  Tester();
-  ~Tester();
+  Helper(const rclcpp::executors::Executor::SharedPtr & executor);
+  ~Helper();
 
 protected:
 
+  CallbackReturn on_configure(const rclcpp_lifecycle::State & state) final;
+  CallbackReturn on_activate(const rclcpp_lifecycle::State & state) final;
+  CallbackReturn on_deactivate(const rclcpp_lifecycle::State & state) final;
+  CallbackReturn on_shutdown(const rclcpp_lifecycle::State & state) final;
 
-  CallbackReturn on_configure(const rclcpp_lifecycle::State & state) override;
-
-  CallbackReturn on_activate(const rclcpp_lifecycle::State & state) override;
-
-  CallbackReturn on_deactivate(const rclcpp_lifecycle::State & state) override;
-
-  CallbackReturn on_shutdown(const rclcpp_lifecycle::State & state) override;
-
-  void run();
+  virtual void onConfigure() {};
+  virtual void onActivate() {};
+  virtual void onDeactivate() {};
+  virtual void onShutdown() {};
 
   object::Robot * getRobotObject();
 
   object::Goal * getGoalObject();
-
-  void updateObjects();
 
   rclcpp::Node::SharedPtr basic_node_;
   std::shared_ptr<tf2_ros::TransformBroadcaster> tf_broadcaster_;

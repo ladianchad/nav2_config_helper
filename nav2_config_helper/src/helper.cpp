@@ -1,14 +1,17 @@
-#include <nav2_config_helper/tester.hpp>
+#include <nav2_config_helper/helper.hpp>
 
 #include <nav2_config_helper/objects/obstacle.hpp>
 
 namespace nav2_config_helper
 {
 
-Tester::Tester()
+Helper::Helper(
+  const rclcpp::executors::Executor::SharedPtr & executor
+)
 : LifecycleNode("nav2_config_helper"),
   loader_("nav2_core", "nav2_core::Controller")
 {
+  this->executor_ = executor;
   this->basic_node_ = rclcpp::Node::make_shared(std::string("_") + this->get_name(), this->get_node_options());
   this->tf_broadcaster_ = std::make_shared<tf2_ros::TransformBroadcaster>(this->basic_node_);
   this->tf_buffer_ = std::make_shared<tf2_ros::Buffer>(this->get_clock());
@@ -20,14 +23,14 @@ Tester::Tester()
   this->vel_pub_ = this->create_publisher<geometry_msgs::msg::TwistStamped>("/cmd_vel", 10);
 }
 
-Tester::~Tester()
+Helper::~Helper()
 {
   this->costmap_thread_.reset();
   this->basic_thread_.reset();
 }
 
 CallbackReturn 
-Tester::on_configure(const rclcpp_lifecycle::State & state)
+Helper::on_configure(const rclcpp_lifecycle::State & state)
 {
   std::string controller_name;
   this->declare_parameter("controller", "dwb_core::DWBLocalPlanner");
@@ -48,7 +51,6 @@ Tester::on_configure(const rclcpp_lifecycle::State & state)
     this->costmap_->getTfBuffer(),
     this->costmap_
   );
-
   this->objects_.push_back(
     std::make_shared<object::Robot>(
       this->shared_from_this(),
@@ -95,7 +97,7 @@ Tester::on_configure(const rclcpp_lifecycle::State & state)
 }
 
 CallbackReturn
-Tester::on_activate(const rclcpp_lifecycle::State & state)
+Helper::on_activate(const rclcpp_lifecycle::State & state)
 {
   this->vel_pub_->on_activate();
   auto robot = getRobotObject();
@@ -103,13 +105,13 @@ Tester::on_activate(const rclcpp_lifecycle::State & state)
   this->costmap_->getCostmap()->resizeMap(100,100, 0.05, -2.5, -2.5);
   this->costmap_->activate();
   this->controller_->activate();
-  this->running_timer_ = this->create_wall_timer(std::chrono::milliseconds(250), std::bind(&Tester::run, this));
-  this->update_timer_ = this->create_wall_timer(std::chrono::milliseconds(250), std::bind(&Tester::updateObjects, this));
+  this->running_timer_ = this->create_wall_timer(std::chrono::milliseconds(250), std::bind(&Helper::run, this));
+  this->update_timer_ = this->create_wall_timer(std::chrono::milliseconds(250), std::bind(&Helper::updateObjects, this));
   return CallbackReturn::SUCCESS;
 }
 
 CallbackReturn
-Tester::on_deactivate(const rclcpp_lifecycle::State & state)
+Helper::on_deactivate(const rclcpp_lifecycle::State & state)
 {
   this->vel_pub_->on_deactivate();
   this->costmap_->deactivate();
@@ -118,14 +120,14 @@ Tester::on_deactivate(const rclcpp_lifecycle::State & state)
 }
 
 CallbackReturn
-Tester::on_shutdown(const rclcpp_lifecycle::State & state)
+Helper::on_shutdown(const rclcpp_lifecycle::State & state)
 {
   this->costmap_->shutdown();
   return CallbackReturn::SUCCESS;
 }
 
 void 
-Tester::run()
+Helper::run()
 {
   auto robot_pose = this->getRobotObject()->getPose();
   auto goal_pose = this->getGoalObject()->getPose();
@@ -166,19 +168,19 @@ Tester::run()
 }
 
 object::Robot *
-Tester::getRobotObject()
+Helper::getRobotObject()
 {
   return static_cast<object::Robot *>(this->objects_[0].get());
 }
 
 object::Goal * 
-Tester::getGoalObject()
+Helper::getGoalObject()
 {
   return static_cast<object::Goal *>(this->objects_[1].get());
 }
 
 void
-Tester::updateObjects()
+Helper::updateObjects()
 {
   nav2_costmap_2d::Costmap2D * costmap = this->costmap_->getCostmap();
   costmap->resetMapToValue(0, 0, costmap->getSizeInCellsX(), costmap->getSizeInCellsY(), nav2_costmap_2d::FREE_SPACE);

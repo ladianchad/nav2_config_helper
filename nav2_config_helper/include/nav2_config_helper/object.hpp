@@ -37,6 +37,7 @@ ParamT getParam(NodeT node, std::string param_name, ParamT default_value) {
 
 using FootPrint = std::vector<geometry_msgs::msg::Point>;
 using MarkerServer = interactive_markers::InteractiveMarkerServer;
+using object_id_t = uint64_t;
 
 class Object
 {
@@ -60,7 +61,8 @@ public:
     const rclcpp_lifecycle::LifecycleNode::SharedPtr node,
     const std::shared_ptr<tf2_ros::TransformBroadcaster> tf_broad_caster,
     const std::shared_ptr<tf2_ros::Buffer> tf,
-    const std::string frame_id
+    const std::string frame_id,
+    const object_id_t id
   );
   ~Object();
 
@@ -69,6 +71,8 @@ public:
   virtual std::string getDescription() = 0;
 
   virtual Type getType();
+
+  uint64_t getId();
 
   std::string getGlobalFrameId();
 
@@ -108,6 +112,7 @@ protected:
   std::string global_frame_id_;
   FootPrintType footprint_type_;
   FootPrint footprint_;
+  const object_id_t id_;
 };
 
 } // namespace object

@@ -14,11 +14,12 @@ Object::Object(
   const rclcpp_lifecycle::LifecycleNode::SharedPtr node,
   const std::shared_ptr<tf2_ros::TransformBroadcaster> tf_broad_caster,
   const std::shared_ptr<tf2_ros::Buffer> tf,
-  const std::string frame_id
-) : tf_broad_caster_(tf_broad_caster), tf_(tf), node_(node), frame_id_(frame_id)
+  const std::string frame_id,
+  const object_id_t id
+) : tf_broad_caster_(tf_broad_caster), tf_(tf), node_(node), frame_id_(frame_id), id_(id)
 {
 }
-
+ 
 Object::~Object()
 {}
 
@@ -27,6 +28,13 @@ Object::getType()
 {
   return Type::DYNAMINC_MOVABLE;
 }
+
+uint64_t
+Object::getId()
+{
+  return this->id_;
+}
+
 
 std::string
 Object::getGlobalFrameId()
